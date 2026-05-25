@@ -68,7 +68,18 @@
 				if(key === 'Space') el.classList.add('wider');
 				row.appendChild(el);
 				keyMap[key.toLowerCase()] = el;
+		
 			});
+		});
+
+		// random element: shows a random fun fact/number and can regenerate
+		const randWrap = document.createElement('div');
+		randWrap.style.cssText = 'max-width:1000px;margin:12px auto 0;text-align:center;color:#374151;font-size:13px';
+		randWrap.innerHTML = '<span id="randText">Random: ' + (Math.floor(Math.random()*1000)) + '</span> <button id="randBtn" style="margin-left:8px;padding:6px 10px;border-radius:8px;border:1px solid #d1d5db;background:#fff;cursor:pointer">New</button>';
+		keyboard.parentNode.insertBefore(randWrap, keyboard.nextSibling);
+		const randText = document.getElementById('randText');
+		document.getElementById('randBtn').addEventListener('click', ()=>{
+			randText.textContent = 'Random: ' + (Math.floor(Math.random()*1000));
 		});
 
 		const display = document.getElementById('display');
