@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Virtual Keyboard</title>
+	<style>
+		:root{--key-w:50px;--key-h:50px}
+		body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:24px;background:#f4f4f6;color:#111}
+		.display{width:100%;max-width:900px;height:140px;margin:0 auto 20px;background:#fff;border-radius:8px;border:1px solid #ddd;box-shadow:0 2px 6px rgba(0,0,0,.04);padding:16px;font-size:28px;display:flex;align-items:center;overflow:auto}
+		.keyboard{width:100%;max-width:900px;margin:0 auto;display:grid;gap:8px}
+		.row{display:flex;gap:8px}
+		.key{background:#bdbdbd;color:#000;height:var(--key-h);min-width:var(--key-w);display:inline-flex;align-items:center;justify-content:center;border-radius:6px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12);user-select:none}
+		.key.wide{min-width:calc(var(--key-w)*2 + 8px)}
+		.key.wider{min-width:calc(var(--key-w)*3 + 16px)}
+		.key.pressed{background:#000;color:#fff}
+		.container{max-width:960px;margin:0 auto}
+		.hint{max-width:900px;margin:8px auto 28px;color:#555;font-size:14px}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="display" id="display" aria-live="polite"></div>
+		<div class="hint">Type on your physical keyboard. Keys will darken while pressed; typed characters appear above.</div>
+		<div class="keyboard" id="keyboard">
+			<div class="row" id="row1"></div>
+			<div class="row" id="row2"></div>
+			<div class="row" id="row3"></div>
+			<div class="row" id="row4"></div>
+			<div class="row" id="row5"></div>
+		</div>
+	</div>
+
+	<script>
+		const layout = [
+			['`','1','2','3','4','5','6','7','8','9','0','-','=', 'Backspace'],
+			['Tab','q','w','e','r','t','y','u','i','o','p','[',']','\\'],
+			['Caps','a','s','d','f','g','h','j','k','l',';','\'', 'Enter'],
+			['Shift','z','x','c','v','b','n','m',',','.','/','Shift'],
+			['Control','Meta','Alt','Space','Alt','Meta','Menu','Control']
+		];
+
+		const keyMap = {};
+		const keyboard = document.getElementById('keyboard');
+		function makeKey(label){
+			const el = document.createElement('div');
+			el.className = 'key';
+			el.textContent = label;
+			el.dataset.key = label.toLowerCase();
+			return el;
+		}
+
+		// render
+		['row1','row2','row3','row4','row5'].forEach((id, i)=>{
+			const row = document.getElementById(id);
+			layout[i].forEach(key=>{
+				const el = makeKey(key === 'Space' ? '␣' : key);
+				if(['Tab','Caps','Shift','Backspace','Enter','Space','Control','Alt','Meta','Menu'].includes(key)) el.classList.add('wide');
+				if(key === 'Space') el.classList.add('wider');
+				row.appendChild(el);
+				keyMap[key.toLowerCase()] = el;
+			});
+		});
+
+		const display = document.getElementById('display');
+		let buffer = '';
+
+		function showChar(ch){
+			if(ch === 'backspace'){
+				buffer = buffer.slice(0,-1);
+			} else if(ch === 'enter'){
+				buffer += '\n';
+			} else if(ch === 'space'){
+				buffer += ' ';
+			} else if(ch.length === 1){
+				buffer += ch;
+			}
+			display.textContent = buffer;
+		}
+
+		function keyNameFromEvent(e){
+			if(e.key === ' ') return 'space';
+			return e.key.toLowerCase();
+		}
+
+		window.addEventListener('keydown', e=>{
+			const name = keyNameFromEvent(e);
+			const el = keyMap[name] || keyMap[e.code.toLowerCase()];
+			if(el) el.classList.add('pressed');
+			// prevent default for some control keys so they don't navigate (optional)
+			if(['tab','backspace'].includes(name)) e.preventDefault();
+			if(name === 'tab') showChar('\t');
+			else showChar(name);
+		});
+
+		window.addEventListener('keyup', e=>{
+			const name = keyNameFromEvent(e);
+			const el = keyMap[name] || keyMap[e.code.toLowerCase()];
+			if(el) el.classList.remove('pressed');
+		});
+
+		// allow clicking virtual keys to insert
+		keyboard.addEventListener('click', ev=>{
+			const k = ev.target.closest('.key');
+			if(!k) return;
+			const name = k.dataset.key;
+			k.classList.add('pressed');
+			setTimeout(()=>k.classList.remove('pressed'),120);
+			if(name === '␣' || name === 'space') showChar(' ');
+			else if(name === 'backspace') showChar('backspace');
+			else if(name === 'enter') showChar('enter');
+			else showChar(name.length===1?name:name);
+		});
+	</script>
+</body>
+</html>
