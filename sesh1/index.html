@@ -5,17 +5,26 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Virtual Keyboard</title>
 	<style>
-		:root{--key-w:50px;--key-h:50px}
-		body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:24px;background:#f4f4f6;color:#111}
-		.display{width:100%;max-width:900px;height:140px;margin:0 auto 20px;background:#fff;border-radius:8px;border:1px solid #ddd;box-shadow:0 2px 6px rgba(0,0,0,.04);padding:16px;font-size:28px;display:flex;align-items:center;overflow:auto}
-		.keyboard{width:100%;max-width:900px;margin:0 auto;display:grid;gap:8px}
-		.row{display:flex;gap:8px}
-		.key{background:#bdbdbd;color:#000;height:var(--key-h);min-width:var(--key-w);display:inline-flex;align-items:center;justify-content:center;border-radius:6px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12);user-select:none}
-		.key.wide{min-width:calc(var(--key-w)*2 + 8px)}
-		.key.wider{min-width:calc(var(--key-w)*3 + 16px)}
-		.key.pressed{background:#000;color:#fff}
-		.container{max-width:960px;margin:0 auto}
-		.hint{max-width:900px;margin:8px auto 28px;color:#555;font-size:14px}
+		:root{--key-w:52px;--key-h:54px;--bg1:#e9eef7;--bg2:#f7f9fc;--panel:#ffffffcc;--border:#d9e2ef;--shadow:0 18px 50px rgba(19,39,67,.14)}
+		*{box-sizing:border-box}
+		body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;margin:0;min-height:100vh;background:radial-gradient(circle at top,#ffffff 0%,var(--bg2) 34%,var(--bg1) 100%);color:#0f172a;padding:28px}
+		.container{max-width:1040px;margin:0 auto}
+		.display{width:100%;min-height:150px;margin:0 auto 18px;background:var(--panel);backdrop-filter:blur(12px);border-radius:22px;border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow);padding:22px 24px;font-size:28px;line-height:1.45;display:flex;align-items:flex-start;white-space:pre-wrap;overflow:auto;color:#111827}
+		.hint{max-width:1000px;margin:0 auto 24px;color:#5b6472;font-size:14px;text-align:center;letter-spacing:.01em}
+		.keyboard{width:100%;max-width:1000px;margin:0 auto;display:grid;gap:12px;padding:22px;background:rgba(255,255,255,.48);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.75);border-radius:28px;box-shadow:var(--shadow)}
+		.row{display:flex;gap:10px;justify-content:center;flex-wrap:nowrap}
+		.key{background:linear-gradient(180deg,#f8fafc 0%,#dfe7f1 100%);color:#0f172a;height:var(--key-h);min-width:var(--key-w);display:inline-flex;align-items:center;justify-content:center;border-radius:14px;border:1px solid var(--border);box-shadow:0 4px 0 #c8d3e0,0 10px 22px rgba(15,23,42,.08);user-select:none;font-weight:600;font-size:14px;letter-spacing:.02em;padding:0 14px;transition:transform .08s ease,box-shadow .08s ease,background .2s ease,color .2s ease}
+		.key.wide{min-width:calc(var(--key-w)*2 + 10px)}
+		.key.wider{min-width:calc(var(--key-w)*4 + 30px)}
+		.key:hover{transform:translateY(-1px)}
+		.key.pressed{background:linear-gradient(180deg,#1f2937 0%,#0f172a 100%);color:#fff;transform:translateY(3px);box-shadow:0 1px 0 #0b1220,0 8px 18px rgba(15,23,42,.22)}
+		#row5 .key{min-width:calc(var(--key-w)*1.1)}
+		@media (max-width: 860px){
+			body{padding:18px}
+			.keyboard{padding:16px;gap:10px}
+			.row{gap:8px;overflow-x:auto;justify-content:flex-start;padding-bottom:2px}
+			.display{font-size:22px;padding:18px}
+		}
 	</style>
 </head>
 <body>
