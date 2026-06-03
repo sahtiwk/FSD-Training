@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVR Portal</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f1f1f1;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .menu a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .hero {
+            background: #e2e8f0;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .btn-register {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            background-color: darkgray;
+            transform: scale(1.1);
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+        }
+
+        .feature-card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            width: 25%;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            header,
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu {
+                margin-top: 10px;
+            }
+
+            .feature-card {
+                width: 85%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img class="logo" src="logo.png" alt="College Logo">
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to CVR College</h1>
+        <button class="btn-register">Register</button>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Student Registration</h3>
+        </div>
+        <div class="feature-card">
+            <h3>Attendance</h3>
+        </div>
+        <div class="feature-card">
+            <h3>Results</h3>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; CVR College. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            width: 500px;
+            height: 300px;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: beige;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .card:hover {
+            animation-name: cardfunc;
+            animation-duration: 2s;
+            animation-iteration-count: 1;
+            animation-timing-function: linear;
+        }
+
+        @keyframes cardfunc {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @media screen and (max-width:500px) {
+            .card {
+                width: 250px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <form for="submit">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

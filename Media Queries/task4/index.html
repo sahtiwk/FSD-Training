@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        aside {
+            background-color: #f4f4f4;
+            width: 250px;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: calc(100vh - 80px);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        @media screen and (max-width: 768px) {
+            aside {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 style="padding-top:25px;">Header</h1>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Sidebar</h2>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="login.html">Login</a>
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+            <a href="logout.html">Logout</a>
+        </aside>
+        <main>
+            <h2>Main Content</h2>
+            <p>This is the main content area.</p>
+        </main>
+    </div>
+</body>
+
+</html>

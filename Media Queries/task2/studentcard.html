@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: ghostwhite;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: beige;
+            width: fit-content;
+            margin: auto;
+        }
+
+        .img {
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .content {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        @media screen and (min-width: 769px) {
+            .card {
+                display: flex;
+                flex-direction: row;
+            }
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .card {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="img">
+            <img src="profilepic.jpg">
+        </div>
+        <div class="content">
+            <p>Name: Sathwik Reddy Dudipala</p>
+            <p>Branch: CSE</p>
+            <p>Email: sathwikreddydudipala@gmail.com</p>
+        </div>
+    </div>
+</body>
+
+</html>
